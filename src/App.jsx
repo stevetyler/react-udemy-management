@@ -9,14 +9,6 @@ function App() {
     projects: []
   });
 
-  let content;
-
-  if (projectsState.selectedProjectId === null) {
-    content = <NewProject />
-  } else if (projectsState.selectedProjectId === undefined ) {
-    content = <NoProjectSelected onAddNewProject={handleAddNewProject}/>
-  }
-
   function handleAddNewProject() {
     setProjectsState(prevState => {
       return {
@@ -24,6 +16,30 @@ function App() {
         selectedProjectId: null
       };
     });
+  }
+
+  function handleSaveNewProject(projectData) {
+    const newProject = {
+      ...projectData,
+      id: Math.random()
+    }
+
+    setProjectsState(prevState => {
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject]
+      }
+    })
+  }
+
+  console.log(projectsState);
+
+  let content;
+
+  if (projectsState.selectedProjectId === null) {
+    content = <NewProject onSaveNewProject={handleSaveNewProject}/>
+  } else if (projectsState.selectedProjectId === undefined ) {
+    content = <NoProjectSelected onAddNewProject={handleAddNewProject}/>
   }
 
   return (
