@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Input from "./Input";
 import Modal from './Modal';
 
-export default function NewProject({onSaveNewProject}) {
+export default function NewProject({onSave, onCancel}) {
   const modal = useRef();
   const title = useRef();
   const description = useRef();
@@ -18,7 +18,7 @@ export default function NewProject({onSaveNewProject}) {
       return;
     } 
 
-    onSaveNewProject({
+    onSave({
       title: enteredTitle,
       description: enteredDescription,
       dueDate: enteredDueDate
@@ -30,7 +30,7 @@ export default function NewProject({onSaveNewProject}) {
       <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
-            <button className="text-stone-800 hover:text-stone-950">
+            <button onClick={onCancel} className="text-stone-800 hover:text-stone-950">
               Cancel
             </button>
           </li>
@@ -47,8 +47,8 @@ export default function NewProject({onSaveNewProject}) {
         </div>
       </div>
       <Modal ref={modal} buttonCaption="Close">
-        <h2>Invalid Input</h2>
-        <p>Please provide valid values for all input fields</p>
+        <h2 className="text-xl font-bold text-stone-500 my-4">Invalid Input</h2>
+        <p className="text-stone-400 mb-4">Please provide valid values for all input fields</p>
       </Modal>
     </>
     
