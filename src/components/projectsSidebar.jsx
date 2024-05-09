@@ -11,7 +11,7 @@ export default function ProjectsSidebar({ onAddNewProject, projects }) {
           + Add project
         </Button>
       </div>
-      <ul class="mt-8">
+      <ul className="mt-8">
         {projects.map(project => {
           return (
             <li key={project.id} >
